@@ -82,16 +82,17 @@ const createComment = () => {
 
 //Создаём описание к фото
 const createDescription = () => {
-  return {
-    id: getRandomInteger(1, PHOTO_COUNT),
-    url: `photos/${getRandomInteger(1, PHOTO_COUNT)}.jpg`,
-    description: getRandomArrayElement(PHOTO_DESCRIPTIONS),
-    likes: getRandomInteger(MIN_LIKES_COUNT, MAX_LIKES_COUNT),
-    comments: Array.from({length: getRandomInteger(1, MAX_COMMENTS_LIMIT)}, createComment),
-  };
+  const photos = [];
+    for (let i=1; i <= PHOTO_COUNT; i++) {
+      photos.push({
+        id: i,
+        url: `photos/${i}.jpg`,
+        description: getRandomArrayElement(PHOTO_DESCRIPTIONS),
+        likes: getRandomInteger(MIN_LIKES_COUNT, MAX_LIKES_COUNT),
+        comments: Array.from({length: getRandomInteger(1, MAX_COMMENTS_LIMIT)}, createComment),
+      });
+    };
+  return photos;
 };
 
-//Создаём 25 описаний к фото
-const samePhotoDescriptions = Array.from({length: PHOTO_COUNT}, createDescription);
-
-console.log(samePhotoDescriptions);
+console.log(createDescription());
