@@ -4,7 +4,7 @@ const getRandomInteger = (startOfRange, endOfRange) => {
 
   //Проверка границ диапазона на то, что они не отрицательные и начало больше конца
   if(startOfRange < 0 || endOfRange < 0 || startOfRange >= endOfRange) {
-    return alert('Неверные значения границ диапазона, введите заново');
+    throw new Error('Неверные значения границ диапазона, введите заново');
   }
 
   startOfRange = Math.ceil(startOfRange);
@@ -14,6 +14,7 @@ const getRandomInteger = (startOfRange, endOfRange) => {
 
 //Функция сравнения длины строки
 const compareStringLenght = (text, symbolQuantity) => (text.lenght <= symbolQuantity);
+compareStringLenght();
 
 //Число фотографий с описаниями
 const PHOTO_COUNT = 25;
@@ -66,33 +67,31 @@ const MIN_LIKES_COUNT = 15;
 const MAX_LIKES_COUNT = 200;
 
 //Определяем случайный элемент в массиве
-const getRandomArrayElement = (elements) => {
- return elements[getRandomInteger(0, elements.length - 1)];
-};
+const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
 //Создаём комментарий
-const createComment = () => {
-  return {
+const createComment = () => (
+  {
     id: getRandomInteger(1, 1000),
     avatar: `img/avatar-${getRandomInteger(1, AVATAR_PICTURE_COUNT)}.svg`,
     message: `${getRandomArrayElement(COMMENT_MESSAGES)} ${getRandomArrayElement(COMMENT_MESSAGES)}`,
     name: getRandomArrayElement(COMMENT_NAMES),
-  };
-};
+  }
+);
 
 //Создаём описание к фото
 const createDescription = () => {
   const photos = [];
-    for (let i=1; i <= PHOTO_COUNT; i++) {
-      photos.push({
-        id: i,
-        url: `photos/${i}.jpg`,
-        description: getRandomArrayElement(PHOTO_DESCRIPTIONS),
-        likes: getRandomInteger(MIN_LIKES_COUNT, MAX_LIKES_COUNT),
-        comments: Array.from({length: getRandomInteger(1, MAX_COMMENTS_LIMIT)}, createComment),
-      });
-    };
+  for (let i=1; i <= PHOTO_COUNT; i++) {
+    photos.push({
+      id: i,
+      url: `photos/${i}.jpg`,
+      description: getRandomArrayElement(PHOTO_DESCRIPTIONS),
+      likes: getRandomInteger(MIN_LIKES_COUNT, MAX_LIKES_COUNT),
+      comments: Array.from({length: getRandomInteger(1, MAX_COMMENTS_LIMIT)}, createComment),
+    });
+  }
   return photos;
 };
 
-console.log(createDescription());
+createDescription();
