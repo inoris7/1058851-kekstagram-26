@@ -13,6 +13,7 @@ const getRandomInteger = (startOfRange, endOfRange) => {
 
 //Функция сравнения длины строки
 const compareStringLenght = (text, symbolQuantity) => (text.lenght <= symbolQuantity);
+compareStringLenght();
 
 //Определяем случайный элемент в массиве
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
