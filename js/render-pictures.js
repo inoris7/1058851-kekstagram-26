@@ -14,5 +14,3 @@ userPhotos.forEach((photo) => {
   userPhotoElement.querySelector('.picture__comments').textContent = photo.comments.length;
   userPhotoList.append(userPhotoElement);
 });
-
-console.log(userPhotoList);
