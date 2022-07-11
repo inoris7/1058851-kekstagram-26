@@ -7,10 +7,14 @@ const userPhotoTemplate = document.querySelector('#picture').content.querySelect
 //Генерируем массив пользовательских фото
 const userPhotos = createDescription();
 
+const userPhotoListFragment = document.createDocumentFragment();
+
 userPhotos.forEach((photo) => {
   const userPhotoElement = userPhotoTemplate.cloneNode(true);
   userPhotoElement.querySelector('.picture__img').src = photo.url;
   userPhotoElement.querySelector('.picture__likes').textContent = photo.likes;
   userPhotoElement.querySelector('.picture__comments').textContent = photo.comments.length;
-  userPhotoList.append(userPhotoElement);
+  userPhotoListFragment.appendChild(userPhotoElement);
 });
+
+userPhotoList.appendChild(userPhotoListFragment);
