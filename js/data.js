@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-import {getRandomInteger, getRandomArrayElement} from './util';
+import {getRandomInteger, getRandomArrayElement} from './util.js';
 
 //Число фотографий с описаниями
 const PHOTO_COUNT = 25;

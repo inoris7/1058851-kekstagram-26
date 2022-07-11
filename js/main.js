@@ -1,3 +1,1 @@
-import {createDescription} from './data';
-
-createDescription();
+import './render-pictures.js';
