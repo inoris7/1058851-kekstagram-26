@@ -18,4 +18,9 @@ compareStringLength();**/
 //Определяем случайный элемент в массиве
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-export {getRandomInteger, getRandomArrayElement};
+//Проверка на нажатие Escape
+const isEscapeKey = (evt) => {
+  return evt.key === 'Escape';
+};
+
+export {getRandomInteger, getRandomArrayElement, isEscapeKey};
