@@ -19,8 +19,7 @@ compareStringLength();**/
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
 //Проверка на нажатие Escape
-const isEscapeKey = (evt) => {
-  return evt.key === 'Escape';
-};
+const isEscapeKey = (evt) => (evt.key === 'Escape');
+
 
 export {getRandomInteger, getRandomArrayElement, isEscapeKey};
