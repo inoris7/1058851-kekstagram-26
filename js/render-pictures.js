@@ -1,4 +1,5 @@
 import {createDescription} from './data.js';
+import { openBigPicture } from './big-picture.js';
 
 //Находим секцию, куда будем вставлять фото пользователей
 const userPhotoList = document.querySelector('.pictures');
@@ -15,6 +16,10 @@ userPhotos.forEach((photo) => {
   userPhotoElement.querySelector('.picture__likes').textContent = photo.likes;
   userPhotoElement.querySelector('.picture__comments').textContent = photo.comments.length;
   userPhotoListFragment.appendChild(userPhotoElement);
+
+  userPhotoElement.addEventListener('click', () => {
+    openBigPicture(photo);
+  });
 });
 
 userPhotoList.appendChild(userPhotoListFragment);
