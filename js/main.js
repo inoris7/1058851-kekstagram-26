@@ -1,2 +1,3 @@
 import './render-pictures.js';
-import './form.js';
+import './upload-form.js';
+import './validation.js';
