@@ -5,9 +5,10 @@ const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 const uploadButton = document.querySelector('#upload-file');
 const closeButton = imgUploadOverlay.querySelector('.img-upload__cancel');
 const commentField = document.querySelector('.text__description');
+const hashtagField = document.querySelector('.text__hashtags');
 
 const onFormEscButtonKeydown = function (evt) {
-  if (isEscapeKey(evt) && commentField !== document.activeElement) {
+  if (isEscapeKey(evt) && commentField !== document.activeElement && hashtagField !== document.activeElement) {
     evt.preventDefault();
     imgUploadOverlay.classList.add('hidden');
     body.classList.remove('modal-open');
@@ -18,8 +19,7 @@ const onFormEscButtonKeydown = function (evt) {
 };
 
 const openUploadForm = () => {
-  uploadButton.addEventListener('click', (evt) => {
-    evt.preventDefault();
+  uploadButton.addEventListener('click', () => {
     body.classList.add('modal-open');
     imgUploadOverlay.classList.remove('hidden');
   });
