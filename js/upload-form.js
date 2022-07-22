@@ -1,4 +1,5 @@
 import {isEscapeKey} from './util.js';
+import {picPreview} from './img-preview-effects.js';
 
 const body = document.querySelector('body');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
@@ -13,6 +14,8 @@ const onFormEscButtonKeydown = function (evt) {
     imgUploadOverlay.classList.add('hidden');
     body.classList.remove('modal-open');
     uploadButton.value = '';
+    picPreview.className = '';
+    picPreview.classList.add('effects__preview--none');
   } else {
     return evt;
   }
@@ -27,6 +30,8 @@ const openUploadForm = () => {
   closeButton.addEventListener('click', () => {
     body.classList.remove('modal-open');
     imgUploadOverlay.classList.add('hidden');
+    picPreview.className = '';
+    picPreview.classList.add('effects__preview--none');
     uploadButton.value = '';
   });
 
