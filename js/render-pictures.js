@@ -1,4 +1,3 @@
-import {createDescription} from './data.js';
 import { openBigPicture } from './big-picture.js';
 
 //Находим секцию, куда будем вставлять фото пользователей
@@ -6,20 +5,23 @@ const userPhotoList = document.querySelector('.pictures');
 //находим шаблон для вставки пользовательских фото
 const userPhotoTemplate = document.querySelector('#picture').content.querySelector('.picture');
 //Генерируем массив пользовательских фото
-const userPhotos = createDescription();
 
-const userPhotoListFragment = document.createDocumentFragment();
+const renderSimilarPhotos = (similarPhotos) => {
+  const similarPhotoListFragment = document.createDocumentFragment();
 
-userPhotos.forEach((photo) => {
-  const userPhotoElement = userPhotoTemplate.cloneNode(true);
-  userPhotoElement.querySelector('.picture__img').src = photo.url;
-  userPhotoElement.querySelector('.picture__likes').textContent = photo.likes;
-  userPhotoElement.querySelector('.picture__comments').textContent = photo.comments.length;
-  userPhotoListFragment.appendChild(userPhotoElement);
+  similarPhotos.forEach((photo) => {
+    const similarPhotoElement = userPhotoTemplate.cloneNode(true);
+    similarPhotoElement.querySelector('.picture__img').src = photo.url;
+    similarPhotoElement.querySelector('.picture__likes').textContent = photo.likes;
+    similarPhotoElement.querySelector('.picture__comments').textContent = photo.comments.length;
+    similarPhotoListFragment.appendChild(similarPhotoElement);
 
-  userPhotoElement.addEventListener('click', () => {
-    openBigPicture(photo);
+    similarPhotoElement.addEventListener('click', () => {
+      openBigPicture(photo);
+    });
   });
-});
 
-userPhotoList.appendChild(userPhotoListFragment);
+  userPhotoList.appendChild(similarPhotoListFragment);
+};
+
+export {renderSimilarPhotos};
