@@ -15,11 +15,18 @@ const getRandomInteger = (startOfRange, endOfRange) => {
 /**const compareStringLength = (text, symbolQuantity) => (text.length <= symbolQuantity);
 compareStringLength();**/
 
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
 //Определяем случайный элемент в массиве
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
 //Проверка на нажатие Escape
 const isEscapeKey = (evt) => (evt.key === 'Escape');
 
-
-export {getRandomInteger, getRandomArrayElement, isEscapeKey};
+export {getRandomInteger, getRandomArrayElement, isEscapeKey, debounce};

@@ -1,4 +1,5 @@
 import { openBigPicture } from './big-picture.js';
+import {debounce} from './util.js';
 
 //Находим секцию, куда будем вставлять фото пользователей
 const userPhotoList = document.querySelector('.pictures');
@@ -11,8 +12,6 @@ const filterDiscussedButton = document.querySelector('#filter-discussed');
 const filterDefaultButton = document.querySelector('#filter-default');
 const filterRandomButton = document.querySelector('#filter-random');
 const filterButtons = document.querySelectorAll('.img-filters__button');
-
-
 
 const similarPhotoCreate = (photo) => {
   similarPhotoListFragment.innerHTML = '';
@@ -29,22 +28,12 @@ const similarPhotoCreate = (photo) => {
 };
 
 const renderSimilarPhotos = (similarPhotos) => {
-
   imgSorting.classList.remove('img-filters--inactive');
   similarPhotos.forEach(similarPhotoCreate);
   userPhotoList.appendChild(similarPhotoListFragment);
+};
 
-  filterDiscussedButton.addEventListener('click', (evt) => {
-    filterButtons.forEach((e) => e.classList.remove('img-filters__button--active'));
-    evt.target.classList.add('img-filters__button--active');
-    userPhotoList.querySelectorAll('.picture').forEach((e) => e.remove());
-
-    similarPhotos
-      .slice()
-      .sort((photoA, photoB) => photoA.likes > photoB.likes ? -1 : 1)
-      .forEach(similarPhotoCreate);
-  });
-
+const randomPhotosRender = (similarPhotos) => {
   filterRandomButton.addEventListener('click', (evt) => {
     filterButtons.forEach((e) => e.classList.remove('img-filters__button--active'));
     evt.target.classList.add('img-filters__button--active');
@@ -55,15 +44,30 @@ const renderSimilarPhotos = (similarPhotos) => {
       .sort(() => Math.random() - 0.5)
       .forEach(similarPhotoCreate);
   });
+};
 
+const disscussedPhotosRender = (similarPhotos) => {
+  debounce();
+  filterDiscussedButton.addEventListener('click', (evt) => {
+    filterButtons.forEach((e) => e.classList.remove('img-filters__button--active'));
+    evt.target.classList.add('img-filters__button--active');
+    userPhotoList.querySelectorAll('.picture').forEach((e) => e.remove());
+
+    similarPhotos
+      .slice()
+      .sort((photoA, photoB) => photoA.likes > photoB.likes ? -1 : 1)
+      .forEach(similarPhotoCreate);
+  });
+};
+
+const defaultPhotosRender = (similarPhotos) => {
   filterDefaultButton.addEventListener('click', (evt) => {
     filterButtons.forEach((e) => e.classList.remove('img-filters__button--active'));
     evt.target.classList.add('img-filters__button--active');
     userPhotoList.querySelectorAll('.picture').forEach((e) => e.remove());
 
     similarPhotos.forEach(similarPhotoCreate);
-
   });
 };
 
-export {renderSimilarPhotos};
+export {renderSimilarPhotos, disscussedPhotosRender, randomPhotosRender, defaultPhotosRender};
