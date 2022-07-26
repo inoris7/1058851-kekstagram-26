@@ -42,6 +42,7 @@ const randomPhotosRender = (similarPhotos) => {
     similarPhotos
       .slice()
       .sort(() => Math.random() - 0.5)
+      .slice(0, 10)
       .forEach(similarPhotoCreate);
   });
 };
