@@ -8,6 +8,7 @@ const closeButton = imgUploadOverlay.querySelector('.img-upload__cancel');
 const commentField = document.querySelector('.text__description');
 const hashtagField = document.querySelector('.text__hashtags');
 const sliderElement = document.querySelector('.img-upload__effect-level');
+const effectPreviewPics = document.querySelectorAll('.effects__preview');
 
 const closeUploadForm = () => {
   imgUploadOverlay.classList.add('hidden');
@@ -15,6 +16,10 @@ const closeUploadForm = () => {
   uploadButton.value = '';
   picPreview.className = '';
   picPreview.classList.add('effects__preview--none');
+  picPreview.src = 'img/upload-default-image.jpg';
+  effectPreviewPics.forEach((e) => {
+    e.style.backgroundImage = 'url(../img/upload-default-image.jpg)';
+  });
 };
 
 const onFormEscButtonKeydown = function (evt) {
